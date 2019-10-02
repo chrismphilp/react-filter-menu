@@ -18,9 +18,10 @@ const FilterDropdown: FunctionComponent<FilterDropdownProps> = (props) => {
       <h2>{props.displayName}</h2>
       {props.filterValues.map((val, index: number) =>
         <FilterRow key={index}
+                   setChecked={props.setChecked}
                    checkedMapKey={props.mapKey}
                    checkedMapInnerKey={index}
-                   setChecked={props.setChecked}
+                   checked={props.checkedMap.get(index)!}
                    displayName={val}/>
       )}
     </div>

@@ -14,7 +14,6 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
     new Map<number, Map<number, boolean>>()
   );
 
-
   useEffect(() => {
     const [fMap, cMap] = processFilterMap(props.filterDefinitions, props.filterData);
     console.error(fMap);
@@ -24,7 +23,14 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
   }, [props.filterDefinitions, props.filterData]);
 
   const handleFilterRowClick = (checkedKey: number, checkedInnerKey: number) => {
-    console.error(checkedValuesMap.get(checkedKey)!.get(checkedInnerKey));
+    // console.error(checkedValuesMap.get(checkedKey)!.get(checkedInnerKey));
+    const mapCopy: Map<number, Map<number, boolean>> = checkedValuesMap;
+    const currentMap: Map<number, boolean> = mapCopy.get(checkedKey)!;
+    const previousState: boolean = currentMap.get(checkedInnerKey)!;
+    currentMap.set(checkedInnerKey, !previousState);
+    mapCopy.set(checkedKey, currentMap);
+    setCheckedValuesMap(mapCopy);
+    console.error(checkedValuesMap);
   };
 
   return (
