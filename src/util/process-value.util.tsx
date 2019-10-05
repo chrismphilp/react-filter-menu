@@ -9,21 +9,25 @@ const calculateFilterValues = (filterDefinitions: IFilterDefinition[], filterDat
 
   for (let i = 0; i < indexesToInclude.length; i++) {
     const currentCheckedMapIndex = indexesToInclude[i];
+    const currentObjectKey = filterDefinitions[currentCheckedMapIndex].objectKey;
     const relatedMap: Map<number, boolean> = checkedValuesMap.get(currentCheckedMapIndex)!;
     const filterValues = filterValuesMap.get(currentCheckedMapIndex)!;
 
     for (let j = 0; j < filterData.length; j++) {
       let shouldInclude: boolean = false;
       for (let k = 0; k < filterValues.length; k++) {
-        if (!includeMap.has(j)
-          && relatedMap.get(k)
+        if (relatedMap.get(k)
           && !shouldInclude
-          && filterData[j][filterDefinitions[currentCheckedMapIndex].objectKey] === filterValues[k]) {
+          && filterData[j][currentObjectKey] === filterValues[k]) {
           shouldInclude = true;
           break;
         }
       }
-      if (shouldInclude) includeMap.set(j, false);
+      if (!shouldInclude) {
+        includeMap.set(j, false);
+      } else if (!includeMap.has(j)) {
+        includeMap.set(j, true);
+      }
     }
   }
   console.error(includeMap);

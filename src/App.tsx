@@ -11,6 +11,10 @@ const App: FunctionComponent = () => {
     {
       displayName: 'Age',
       objectKey: 'age'
+    },
+    {
+      displayName: 'Alive',
+      objectKey: 'alive'
     }
   ];
 

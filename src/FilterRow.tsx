@@ -11,7 +11,7 @@ type FilterRow = {
 const FilterRow: FunctionComponent<FilterRow> = (props) => {
   return (
     <div onClick={() => props.setChecked(props.checkedMapKey, props.checkedMapInnerKey)}>
-      <h5>{props.displayName} - {props.checked.toString()}</h5>
+      <h5>{props.displayName.toString()} - {props.checked.toString()}</h5>
     </div>
   );
 };
