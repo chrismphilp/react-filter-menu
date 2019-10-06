@@ -51,6 +51,7 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
                             checkedMap={checkedValuesMap.get(index)!}/>
           </div>
         )}
+        <button onClick={getCurrentValues} type='button'>Reset Selections</button>
         <button onClick={getCurrentValues} type='button'>Apply Filter</button>
       </div>
     );
