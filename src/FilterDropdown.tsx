@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import FilterRow from './FilterRow';
+import { isEmptyObject } from './util/data.util';
 
 type FilterDropdownProps = {
   setChecked: (k1: number, k2: number) => void;
@@ -11,7 +12,7 @@ type FilterDropdownProps = {
 
 const FilterDropdown: FunctionComponent<FilterDropdownProps> = (props) => {
 
-  if (!props.filterValues) return <div/>;
+  if (isEmptyObject(props.filterValues)) return <div/>;
 
   return (
     <div style={styles.root}>
