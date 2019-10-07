@@ -16,7 +16,7 @@ const FilterHeader: FunctionComponent<FilterHeader> = (props) => {
 const styles = {
   root: {
     width: '100%',
-    minHeight: 25
+    minHeight: 15
   }
 };
 

@@ -14,7 +14,7 @@ const FilterDropdown: FunctionComponent<FilterDropdownProps> = (props) => {
   if (!props.filterValues) return <div/>;
 
   return (
-    <div>
+    <div style={styles.root}>
       <h2>{props.displayName}</h2>
       {props.filterValues.map((val, index: number) =>
         <FilterRow key={index}
@@ -26,6 +26,15 @@ const FilterDropdown: FunctionComponent<FilterDropdownProps> = (props) => {
       )}
     </div>
   );
+};
+
+const styles = {
+  root: {
+    borderStyle: 'solid',
+    borderWidth: 1.5,
+    borderColor: 'black',
+    padding: 5
+  }
 };
 
 export default FilterDropdown;

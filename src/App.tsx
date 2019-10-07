@@ -47,10 +47,27 @@ const App: FunctionComponent = () => {
   ];
 
   return (
-    <Filter filterDefinitions={filterDefinitions}
-            filterData={filterData}
-            filterHeader={'Humans'}/>
+    <div style={styles.root}>
+      <div style={styles.data}/>
+      <div style={styles.filterMenu}>
+        <Filter filterDefinitions={filterDefinitions}
+                filterData={filterData}
+                filterHeader={'Humans'}/>
+      </div>
+    </div>
   );
+};
+
+const styles = {
+  root: {
+    display: 'flex'
+  },
+  data: {
+    flex: 1
+  },
+  filterMenu: {
+    flex: 1
+  }
 };
 
 export default App;
