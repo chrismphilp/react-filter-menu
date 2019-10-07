@@ -2,7 +2,7 @@ import { IFilterDefinition } from '../model/FilterDefinitions.model';
 
 const calculateFilterValues = (filterDefinitions: IFilterDefinition[], filterData: any[],
                                checkedValuesMap: Map<number, Map<number, boolean>>,
-                               filterValuesMap: Map<number, any[]>) => {
+                               filterValuesMap: Map<number, any[]>): Map<number, boolean> => {
 
   let includeMap: Map<number, boolean> = new Map<number, boolean>();
   const indexesToInclude: number[] = getMapKeysToInclude(checkedValuesMap);
@@ -23,14 +23,11 @@ const calculateFilterValues = (filterDefinitions: IFilterDefinition[], filterDat
           break;
         }
       }
-      if (!shouldInclude) {
-        includeMap.set(j, false);
-      } else if (!includeMap.has(j)) {
-        includeMap.set(j, true);
-      }
+      if (!shouldInclude) includeMap.set(j, false);
+      else if (!includeMap.has(j)) includeMap.set(j, true);
     }
   }
-  console.error(includeMap);
+  return includeMap;
 };
 
 const getMapKeysToInclude = (checkedValuesMap: Map<number, Map<number, boolean>>): number[] => {

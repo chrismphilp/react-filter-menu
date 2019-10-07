@@ -8,12 +8,15 @@ const processFilterMap = (filterDefinitions: IFilterDefinition[], filterData: an
 
   for (let i = 0; i < filterDefinitions.length; i++) {
     const fieldKey = filterDefinitions[i].objectKey;
-    let dataArray: Set<any> = new Set<any>();
+    let dataArray: any[] = [];
     let tempMap: Map<number, boolean> = new Map<number, boolean>();
 
     for (let j = 0; j < filterData.length; j++) {
-      dataArray.add(collectFilterValues(filterData[j], fieldKey));
-      tempMap.set(j, false);
+      const curr = collectFilterValues(filterData[j], fieldKey);
+      if (!dataArray.includes(curr)) {
+        tempMap.set(j, false);
+        dataArray.push(curr);
+      }
     }
     filterValues.set(i, Array.from(dataArray));
     checkedMap.set(i, tempMap);
