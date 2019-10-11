@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { IFilterDefinition } from './model/FilterDefinitions.model';
 import FilterDropdown from './FilterDropdown';
 import { processFilterMap } from './util/on-startup.util';
-import { calculateFilterValues } from './util/process-value.util';
+import { calculateFilterValues, resetCheckedValuesMap } from './util/process-value.util';
 
 type FilterMenuProps = {
   filterDefinitions: IFilterDefinition[];
@@ -32,11 +32,16 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
       setLoading(!loading);
     };
 
-    const getCurrentValues = () => {
+    const getCurrentValues = (): void => {
       const startTime = performance.now();
       console.error(calculateFilterValues(props.filterDefinitions, props.filterData,
         checkedValuesMap, filterValuesMap));
       console.error(`Total time: ${performance.now() - startTime}`);
+    };
+
+    const resetCheckedValues = (): void => {
+      setCheckedValuesMap(resetCheckedValuesMap(checkedValuesMap));
+      setLoading(!loading);
     };
 
     return (
@@ -51,7 +56,7 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
                             checkedMap={checkedValuesMap.get(index)!}/>
           </div>
         )}
-        <button onClick={getCurrentValues} type='button'>Reset Selections</button>
+        <button onClick={resetCheckedValues} type='button'>Reset Selections</button>
         <button onClick={getCurrentValues} type='button'>Apply Filter</button>
       </div>
     );

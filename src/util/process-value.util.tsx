@@ -45,6 +45,17 @@ const getMapKeysToInclude = (checkedValuesMap: Map<number, Map<number, boolean>>
   return indexesToInclude;
 };
 
+const resetCheckedValuesMap =
+  (checkedValuesMap: Map<number, Map<number, boolean>>): Map<number, Map<number, boolean>> => {
+  for (let i = 0; i < checkedValuesMap.size; i++) {
+    for (let j = 0; i < checkedValuesMap.get(i)!.size; j++) {
+      checkedValuesMap.get(i)!.set(j, false);
+    }
+  }
+  return checkedValuesMap;
+};
+
 export {
-  calculateFilterValues
+  calculateFilterValues,
+  resetCheckedValuesMap
 };
