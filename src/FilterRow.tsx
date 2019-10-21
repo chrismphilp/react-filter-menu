@@ -5,8 +5,16 @@ type StyledProps = {
   checked: boolean;
 }
 
-const RootDiv = styled.div`
+const RootContainer = styled.div`
   width: 100%;
+  height: 50px;
+  background-color: #f1f1f1;
+  padding-top: 7.5px;
+  color: black;
+`;
+
+const RowLabel = styled.label`
+  padding-left: 10.5px;
 `;
 
 const CheckboxContainer = styled.div`
@@ -54,7 +62,7 @@ const CheckboxText = styled.span`
   margin-left: 8px;
 `;
 
-type FilterRow = {
+type FilterRowProps = {
   setChecked: (k1: number, k2: number) => void;
   checked: boolean;
   checkedMapKey: number;
@@ -62,10 +70,10 @@ type FilterRow = {
   displayName: string;
 };
 
-const FilterRow: FunctionComponent<FilterRow> = (props) => {
+const FilterRow: FunctionComponent<FilterRowProps> = (props) => {
   return (
-    <RootDiv>
-      <label>
+    <RootContainer>
+      <RowLabel>
         <CheckboxContainer>
           <HiddenCheckbox checked={props.checked}
                           onChange={() => props.setChecked(props.checkedMapKey, props.checkedMapInnerKey)}/>
@@ -76,8 +84,8 @@ const FilterRow: FunctionComponent<FilterRow> = (props) => {
           </StyledCheckbox>
         </CheckboxContainer>
         <CheckboxText>{props.displayName.toString()}</CheckboxText>
-      </label>
-    </RootDiv>
+      </RowLabel>
+    </RootContainer>
   );
 };
 
