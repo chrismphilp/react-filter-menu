@@ -10,7 +10,9 @@ const getPresentableData = (filterDefinitions: IFilterDefinition[], filterData: 
     return filterData;
   } else {
     let data: any[] = [];
-    for (let i = 0; i < includeMap.size; i++) if (includeMap.get(i)) data.push(filterData[i]);
+    for (let i = 0; i < includeMap.size; i++) {
+      if (includeMap.get(i)) data.push(filterData[i]);
+    }
     return data;
   }
 };

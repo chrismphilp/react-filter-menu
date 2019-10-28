@@ -2,6 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { IFilterDefinition } from './model/FilterDefinitions.model';
 import FilterHeader from './FilterHeader';
 import FilterMenu from './FilterMenu';
+import styled from 'styled-components';
+
+const FilterRoot = styled.div`
+  background-color: #f5f6f2;
+`;
 
 type FilterMenuProps = {
   updateData: (data: any[]) => void;
@@ -12,17 +17,13 @@ type FilterMenuProps = {
 
 const Filter: FunctionComponent<FilterMenuProps> = (props) => {
   return (
-    <div style={styles.root}>
+    <FilterRoot>
       <FilterHeader filterHeader={props.filterHeader}/>
       <FilterMenu filterDefinitions={props.filterDefinitions}
                   filterData={props.filterData}
                   updateData={props.updateData}/>
-    </div>
+    </FilterRoot>
   );
-};
-
-const styles = {
-  root: {}
 };
 
 export default Filter;

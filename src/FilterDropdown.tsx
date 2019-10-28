@@ -10,6 +10,7 @@ const RootContainer = styled.div`
 
 type DropdownButtonProps = {
   checked: boolean;
+  rowCount: number;
 };
 
 const DropdownButton = styled.button`
@@ -40,7 +41,7 @@ const DropdownContent = styled.div`
   padding: 0 18px;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  max-height: ${(props: DropdownButtonProps) => (props.checked ? '150px' : 0)};  
+  max-height: ${(props: DropdownButtonProps) => (props.checked ? `${props.rowCount * 65}px` : 0)};  
   background-color: #f1f1f1;
 `;
 
@@ -65,8 +66,13 @@ const FilterDropdown: FunctionComponent<FilterDropdownProps> = (props) => {
 
   return (
     <RootContainer>
-      <DropdownButton onClick={setDropdown} checked={open}>{props.displayName}</DropdownButton>
-      <DropdownContent checked={open}>
+      <DropdownButton onClick={setDropdown}
+                      checked={open}
+                      rowCount={0}>
+        {props.displayName}
+      </DropdownButton>
+      <DropdownContent checked={open}
+                       rowCount={props.filterValues.length}>
         {props.filterValues.map((val, index: number) =>
           <FilterRow key={index}
                      setChecked={props.setChecked}

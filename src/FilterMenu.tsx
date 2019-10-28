@@ -4,17 +4,38 @@ import FilterDropdown from './FilterDropdown';
 import { processFilterMap } from './util/on-startup.util';
 import { getPresentableData, resetCheckedValuesMap } from './util/process-value.util';
 import styled from 'styled-components';
+import device from './device-sizes';
 
 const FilterButton = styled.button`
+  width: 100%;
   background-color: #f5f6h6;
   color: white;
   cursor: pointer;
   padding: 18px;
-  width: 35%;
   border: none;
   text-align: left;
   outline: none;
   font-size: 15px;
+`;
+
+const ButtonContainer = styled.div`
+  @media ${device.laptop} {
+    display: flex;
+  }  
+  background-color: #f5f6f2;
+  padding: 10px;
+`;
+
+const FilterButtonContainer = styled.div` 
+  @media ${device.mobile} {
+    width: 100%;
+    padding-top: 5px;
+  }  
+  
+  @media ${device.laptop} {
+    flex: 1;
+    padding-left: 5px;
+  }
 `;
 
 type FilterMenuProps = {
@@ -72,8 +93,14 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
                           checkedMap={checkedValuesMap.get(index)!}/>
         </div>
       )}
-      <FilterButton onClick={resetCheckedValues} type='button'>Reset Selections</FilterButton>
-      <FilterButton onClick={updateCurrentValues} type='button'>Apply Filter</FilterButton>
+      <ButtonContainer>
+        <FilterButtonContainer>
+          <FilterButton onClick={resetCheckedValues} type='button'>Reset Selections</FilterButton>
+        </FilterButtonContainer>
+        <FilterButtonContainer>
+          <FilterButton onClick={updateCurrentValues} type='button'>Apply Filter</FilterButton>
+        </FilterButtonContainer>
+      </ButtonContainer>
     </div>
   );
 };

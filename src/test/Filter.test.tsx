@@ -4,7 +4,8 @@ import Filter from '../Filter';
 
 test('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Filter filterData={[]}
+  ReactDOM.render(<Filter updateData={() => null}
+                          filterData={[]}
                           filterDefinitions={[]}
                           filterHeader={''}/>, div);
   ReactDOM.unmountComponentAtNode(div);

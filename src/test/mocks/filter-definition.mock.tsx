@@ -4,6 +4,10 @@ const filterDefinitionMock: IFilterDefinition[] = [
   {
     displayName: 'Name',
     objectKey: 'name'
+  },
+  {
+    displayName: 'Age',
+    objectKey: 'age'
   }
 ];
 
