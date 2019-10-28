@@ -1,5 +1,20 @@
 import { IFilterDefinition } from '../model/FilterDefinitions.model';
 
+const getPresentableData = (filterDefinitions: IFilterDefinition[], filterData: any[],
+                            checkedValuesMap: Map<number, Map<number, boolean>>,
+                            filterValuesMap: Map<number, any[]>): any[] => {
+  const includeMap: Map<number, boolean> = calculateFilterValues(
+    filterDefinitions, filterData, checkedValuesMap, filterValuesMap);
+
+  if (includeMap.size === 0) {
+    return filterData;
+  } else {
+    let data: any[] = [];
+    for (let i = 0; i < includeMap.size; i++) if (includeMap.get(i)) data.push(filterData[i]);
+    return data;
+  }
+};
+
 const calculateFilterValues = (filterDefinitions: IFilterDefinition[], filterData: any[],
                                checkedValuesMap: Map<number, Map<number, boolean>>,
                                filterValuesMap: Map<number, any[]>): Map<number, boolean> => {
@@ -56,6 +71,7 @@ const resetCheckedValuesMap =
 };
 
 export {
+  getPresentableData,
   calculateFilterValues,
   resetCheckedValuesMap
 };

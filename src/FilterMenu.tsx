@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { IFilterDefinition } from './model/FilterDefinitions.model';
 import FilterDropdown from './FilterDropdown';
 import { processFilterMap } from './util/on-startup.util';
-import { calculateFilterValues, resetCheckedValuesMap } from './util/process-value.util';
+import { getPresentableData, resetCheckedValuesMap } from './util/process-value.util';
 import styled from 'styled-components';
 
 const FilterButton = styled.button`
@@ -18,6 +18,7 @@ const FilterButton = styled.button`
 `;
 
 type FilterMenuProps = {
+  updateData: (data: any[]) => void;
   filterDefinitions: IFilterDefinition[];
   filterData: any[];
 };
@@ -45,10 +46,10 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
     setLoading(!loading);
   };
 
-  const getCurrentValues = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const updateCurrentValues = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
     const startTime = performance.now();
-    console.error(calculateFilterValues(props.filterDefinitions, props.filterData,
+    props.updateData(getPresentableData(props.filterDefinitions, props.filterData,
       checkedValuesMap, filterValuesMap));
     console.error(`Total time: ${performance.now() - startTime}`);
   };
@@ -72,7 +73,7 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
         </div>
       )}
       <FilterButton onClick={resetCheckedValues} type='button'>Reset Selections</FilterButton>
-      <FilterButton onClick={getCurrentValues} type='button'>Apply Filter</FilterButton>
+      <FilterButton onClick={updateCurrentValues} type='button'>Apply Filter</FilterButton>
     </div>
   );
 };
