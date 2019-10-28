@@ -71,13 +71,16 @@ type FilterRowProps = {
 };
 
 const FilterRow: FunctionComponent<FilterRowProps> = (props) => {
+
+  const checked = (props.checked !== undefined) ? props.checked : false;
+
   return (
     <RootContainer>
       <RowLabel>
         <CheckboxContainer>
-          <HiddenCheckbox checked={props.checked}
+          <HiddenCheckbox checked={checked}
                           onChange={() => props.setChecked(props.checkedMapKey, props.checkedMapInnerKey)}/>
-          <StyledCheckbox checked={props.checked}>
+          <StyledCheckbox checked={checked}>
             <Icon viewBox="0 0 24 24">
               <polyline points="20 6 9 17 4 12"/>
             </Icon>

@@ -53,8 +53,8 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
 
   useEffect(() => {
     const [fMap, cMap] = processFilterMap(props.filterDefinitions, props.filterData);
-    setFilterValuesMap(fMap);
     setCheckedValuesMap(cMap);
+    setFilterValuesMap(fMap);
   }, [props.filterDefinitions, props.filterData]);
 
   const handleFilterRowClick = (checkedKey: number, checkedInnerKey: number) => {

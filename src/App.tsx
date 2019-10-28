@@ -15,6 +15,7 @@ const filterDefinitions: IFilterDefinition[] = [
     displayName: 'Alive',
     objectKey: 'alive'
   }
+
 ];
 
 const filterData = [
