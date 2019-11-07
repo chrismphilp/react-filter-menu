@@ -61,7 +61,8 @@ const App: FunctionComponent = () => {
         <Filter filterDefinitions={filterDefinitions}
                 filterData={filterData}
                 filterHeader={'Humans'}
-                updateData={updateData}/>
+                updateData={updateData}
+                theme={'light'}/>
       </div>
     </div>
   );

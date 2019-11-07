@@ -1,23 +1,35 @@
 import React, { FunctionComponent } from 'react';
+import { ColorScheme } from './model/ColorScheme.model';
+import styled from 'styled-components';
 
-type FilterHeader = {
+type FilterStylingProps = {
+  colorScheme: ColorScheme;
+};
+
+const FilterHeaderRoot = styled.div`
+  width: 100%;
+  minHeight: 15px;
+  background-color: ${(props: FilterStylingProps) => (props.colorScheme.primary)};
+`;
+
+const FilterHeaderText = styled.h2`
+  color: ${(props: FilterStylingProps) => (props.colorScheme.secondaryTextColor)};
+  padding-top: 15px;
+  padding-left: 15px;
+`;
+
+type FilterHeaderProps = {
   filterHeader: string;
+  colorScheme: ColorScheme;
 };
 
-const FilterHeader: FunctionComponent<FilterHeader> = (props) => {
+const FilterHeader: FunctionComponent<FilterHeaderProps> = (props) => {
   return (
-    <div style={styles.root}>
-      <h2>{props.filterHeader}</h2>
+    <FilterHeaderRoot colorScheme={props.colorScheme}>
+      <FilterHeaderText colorScheme={props.colorScheme}>{props.filterHeader}</FilterHeaderText>
       <hr/>
-    </div>
+    </FilterHeaderRoot>
   )
-};
-
-const styles = {
-  root: {
-    width: '100%',
-    minHeight: 15
-  }
 };
 
 export default FilterHeader;

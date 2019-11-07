@@ -1,16 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import { ColorScheme } from './model/ColorScheme.model';
 
 type StyledProps = {
-  checked: boolean;
+  checked?: boolean;
+  colorScheme: ColorScheme;
 }
 
 const RootContainer = styled.div`
   width: 100%;
-  height: 50px;
-  background-color: #f1f1f1;
+  height: 35px;
+  background-color: ${(props: StyledProps) => props.colorScheme.secondary};
   padding-top: 7.5px;
-  color: black;
+  color: ${(props: StyledProps) => props.colorScheme.secondaryTextColor};
 `;
 
 const RowLabel = styled.label`
@@ -68,6 +70,7 @@ type FilterRowProps = {
   checkedMapKey: number;
   checkedMapInnerKey: number;
   displayName: string;
+  colorScheme: ColorScheme;
 };
 
 const FilterRow: FunctionComponent<FilterRowProps> = (props) => {
@@ -75,12 +78,13 @@ const FilterRow: FunctionComponent<FilterRowProps> = (props) => {
   const checked = (props.checked !== undefined) ? props.checked : false;
 
   return (
-    <RootContainer>
+    <RootContainer colorScheme={props.colorScheme}>
       <RowLabel>
         <CheckboxContainer>
           <HiddenCheckbox checked={checked}
                           onChange={() => props.setChecked(props.checkedMapKey, props.checkedMapInnerKey)}/>
-          <StyledCheckbox checked={checked}>
+          <StyledCheckbox checked={checked}
+                          colorScheme={props.colorScheme}>
             <Icon viewBox="0 0 24 24">
               <polyline points="20 6 9 17 4 12"/>
             </Icon>

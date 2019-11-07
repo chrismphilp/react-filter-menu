@@ -7,6 +7,7 @@ test('renders without crashing', () => {
   ReactDOM.render(<Filter updateData={() => null}
                           filterData={[]}
                           filterDefinitions={[]}
-                          filterHeader={''}/>, div);
+                          filterHeader={''}
+                          theme={'dark'}/>, div);
   ReactDOM.unmountComponentAtNode(div);
 });

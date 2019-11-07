@@ -4,7 +4,7 @@ import filterDefinitionMock from '../mocks/filter-definition.mock';
 import filterDataMock from '../mocks/filter-data.mock';
 import filterValuesMapMock from '../mocks/filter-values-map.mock';
 
-test('return empty if none of the filter values are checked', () => {
+test('return empty if none of the filter values are open', () => {
 
   const unselectedCheckedValuesMapMock: Map<number, Map<number, boolean>> = new Map([
     [0, new Map<number, boolean>([
@@ -25,7 +25,7 @@ test('return empty if none of the filter values are checked', () => {
   expect(dataToIncludeMap.get(1)).toBeFalsy();
 });
 
-test('return correct values if the filter values are checked', () => {
+test('return correct values if the filter values are open', () => {
 
   const selectedMap: Map<number, Map<number, boolean>> = new Map([
     [0, new Map<number, boolean>([
@@ -49,7 +49,7 @@ test('return correct values if the filter values are checked', () => {
   expect(dataToIncludeMap.get(4)).toBeFalsy();
 });
 
-test('reset checked values map should return all false values', () => {
+test('reset open values map should return all false values', () => {
 
   const selectedMap: Map<number, Map<number, boolean>> = new Map([
     [0, new Map<number, boolean>([

@@ -3,13 +3,18 @@ import { IFilterDefinition } from './model/FilterDefinitions.model';
 import FilterDropdown from './FilterDropdown';
 import { processFilterMap } from './util/on-startup.util';
 import { getPresentableData, resetCheckedValuesMap } from './util/process-value.util';
+import { ColorScheme } from './model/ColorScheme.model';
 import styled from 'styled-components';
 import device from './device-sizes';
 
+type StyledProps = {
+  colorScheme: ColorScheme;
+};
+
 const FilterButton = styled.button`
   width: 100%;
-  background-color: #f5f6h6;
-  color: white;
+  background-color: ${(props: StyledProps) => props.colorScheme.button};
+  color: ${(props: StyledProps) => props.colorScheme.secondaryTextColor};
   cursor: pointer;
   padding: 18px;
   border: none;
@@ -22,7 +27,7 @@ const ButtonContainer = styled.div`
   @media ${device.laptop} {
     display: flex;
   }  
-  background-color: #f5f6f2;
+  background-color: ${(props: StyledProps) => props.colorScheme.secondary};
   padding: 10px;
 `;
 
@@ -34,6 +39,7 @@ const FilterButtonContainer = styled.div`
   
   @media ${device.laptop} {
     flex: 1;
+    padding-top: 0;
     padding-left: 5px;
   }
 `;
@@ -42,6 +48,7 @@ type FilterMenuProps = {
   updateData: (data: any[]) => void;
   filterDefinitions: IFilterDefinition[];
   filterData: any[];
+  colorScheme: ColorScheme;
 };
 
 const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
@@ -85,20 +92,23 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
     <div>
       {props.filterDefinitions.map((definition: IFilterDefinition, index: number) =>
         <div key={index}>
-          <div>{loading}</div>
+          {loading}
           <FilterDropdown mapKey={index}
                           setChecked={handleFilterRowClick}
                           displayName={definition.displayName}
                           filterValues={filterValuesMap.get(index)!}
-                          checkedMap={checkedValuesMap.get(index)!}/>
+                          checkedMap={checkedValuesMap.get(index)!}
+                          colorScheme={props.colorScheme}/>
         </div>
       )}
-      <ButtonContainer>
+      <ButtonContainer colorScheme={props.colorScheme}>
         <FilterButtonContainer>
-          <FilterButton onClick={resetCheckedValues} type='button'>Reset Selections</FilterButton>
+          <FilterButton onClick={resetCheckedValues} type='button'
+                        colorScheme={props.colorScheme}>Reset Selections</FilterButton>
         </FilterButtonContainer>
         <FilterButtonContainer>
-          <FilterButton onClick={updateCurrentValues} type='button'>Apply Filter</FilterButton>
+          <FilterButton onClick={updateCurrentValues} type='button'
+                        colorScheme={props.colorScheme}>Apply Filter</FilterButton>
         </FilterButtonContainer>
       </ButtonContainer>
     </div>
