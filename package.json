@@ -1,7 +1,23 @@
 {
   "name": "filter-menu",
   "version": "0.1.0",
-  "private": true,
+  "description": "A filter component for JSON data, utilising React and styled-components",
+  "homepage": "https://github.com/chrismphilp/filter-menu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrismphilp/filter-menu"
+  },
+  "bugs": {
+    "url": "https://github.com/chrismphilp/filter-menu/issues"
+  },
+  "author": "Christopher Philp",
+  "keywords": [
+    "react",
+    "react-component",
+    "component",
+    "filter"
+  ],
+  "license": "MIT",
   "dependencies": {
     "@types/jest": "24.0.18",
     "@types/node": "12.7.8",
@@ -34,5 +50,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "readmeFilename": "README.md"
 }
