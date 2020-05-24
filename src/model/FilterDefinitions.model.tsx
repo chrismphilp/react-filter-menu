@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-export interface IFilterDefinition {
+export type IFilterDefinition = {
   displayName: string;
   objectKey: string;
   checkedByDefault?: boolean;
@@ -8,7 +8,7 @@ export interface IFilterDefinition {
   filterValues?: any[];
 }
 
-export interface IFilterIcon {
+export type IFilterIcon = {
   checked: boolean;
   disabled: boolean;
 }

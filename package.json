@@ -1,8 +1,9 @@
 {
   "name": "react-filter-menu",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A filter component for JSON data, utilising React and styled-components",
   "homepage": "https://github.com/chrismphilp/filter-menu",
+  "readmeFilename": "README.md",
   "repository": {
     "type": "git",
     "url": "https://github.com/chrismphilp/filter-menu"
@@ -19,51 +20,37 @@
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "files": ["lib/**/*"],
+  "files": [
+    "lib/**/*"
+  ],
   "license": "MIT",
   "dependencies": {
-    "@types/jest": "24.0.18",
     "@types/node": "12.7.8",
     "@types/react": "16.9.4",
-    "@types/react-dom": "16.9.1",
     "@types/styled-components": "^4.4.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1",
     "styled-components": "^4.4.1",
-    "typescript": "3.6.3"
+    "typescript": "3.8.3"
+  },
+  "devDependencies": {
+    "@types/react-dom": "16.9.1",
+    "react-dom": "^16.13.1",
+    "@types/jest": "^24.0.18",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.0.0",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "tsc",
-    "test": "react-scripts test",
-    "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.ts\"",
+    "test": "jest --config jestconfig.json",
+    "format": "prettier --write \"src/**/*.tsx\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "readmeFilename": "README.md",
-  "devDependencies": {
-    "prettier": "^2.0.5",
-    "tslint": "^6.1.2",
-    "tslint-config-prettier": "^1.18.0"
   }
 }
