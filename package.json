@@ -35,8 +35,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build-typescript": "tsc",
+    "build": "tsc",
     "test": "react-scripts test",
     "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",

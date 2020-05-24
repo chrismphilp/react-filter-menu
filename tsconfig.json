@@ -7,7 +7,6 @@
       "esnext"
     ],
     "outDir": "./lib",
-    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -16,8 +15,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "declaration": true,
     "jsx": "react",
+    "allowJs": true,
+    "isolatedModules": true,
     "noEmit": true
   },
   "include": [
