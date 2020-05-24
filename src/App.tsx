@@ -5,49 +5,47 @@ import { IFilterDefinition } from './model/FilterDefinitions.model';
 const filterDefinitions: IFilterDefinition[] = [
   {
     displayName: 'Name',
-    objectKey: 'name'
+    objectKey: 'name',
   },
   {
     displayName: 'Age',
-    objectKey: 'age'
+    objectKey: 'age',
   },
   {
     displayName: 'Alive',
-    objectKey: 'alive'
-  }
-
+    objectKey: 'alive',
+  },
 ];
 
 const filterData = [
   {
     age: 14,
     name: 'Paul Phelps',
-    alive: true
+    alive: true,
   },
   {
     age: 25,
     name: 'Chris Philp',
-    alive: true
+    alive: true,
   },
   {
     age: 105,
     name: 'Abraham Lincoln',
-    alive: false
+    alive: false,
   },
   {
     age: 25,
     name: 'Abraham Lincoln',
-    alive: false
+    alive: false,
   },
   {
     age: 105,
     name: 'Abraham Lincoln',
-    alive: false
-  }
+    alive: false,
+  },
 ];
 
 const App: FunctionComponent = () => {
-
   const [divData, setDivData] = useState<any[]>(filterData);
 
   const updateData = (data: any[]): void => setDivData(data);
@@ -55,14 +53,18 @@ const App: FunctionComponent = () => {
   return (
     <div style={styles.root}>
       <div style={styles.data}>
-        {divData.map((value, key) => <div key={key}>{value.name}</div>)}
+        {divData.map((value, key) => (
+          <div key={key}>{value.name}</div>
+        ))}
       </div>
       <div style={styles.filterMenu}>
-        <Filter filterDefinitions={filterDefinitions}
-                filterData={filterData}
-                filterHeader={'Humans'}
-                updateData={updateData}
-                theme={'light'}/>
+        <Filter
+          filterDefinitions={filterDefinitions}
+          filterData={filterData}
+          filterHeader={'Humans'}
+          updateData={updateData}
+          theme={'light'}
+        />
       </div>
     </div>
   );
@@ -70,14 +72,14 @@ const App: FunctionComponent = () => {
 
 const styles = {
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   data: {
-    flex: 1
+    flex: 1,
   },
   filterMenu: {
-    flex: 1
-  }
+    flex: 1,
+  },
 };
 
 export default App;

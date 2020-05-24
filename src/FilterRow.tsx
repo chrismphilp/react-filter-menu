@@ -5,7 +5,7 @@ import { ColorScheme } from './model/ColorScheme.model';
 type StyledProps = {
   checked?: boolean;
   colorScheme: ColorScheme;
-}
+};
 
 const RootContainer = styled.div`
   width: 100%;
@@ -30,7 +30,7 @@ const Icon = styled.svg`
   stroke-width: 2px;
 `;
 
-const HiddenCheckbox = styled.input.attrs({type: 'checkbox'})`
+const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
   clip: rect(0 0 0 0);
   clippath: inset(50%);
@@ -74,19 +74,19 @@ type FilterRowProps = {
 };
 
 const FilterRow: FunctionComponent<FilterRowProps> = (props) => {
-
-  const checked = (props.checked !== undefined) ? props.checked : false;
+  const checked = props.checked !== undefined ? props.checked : false;
 
   return (
     <RootContainer colorScheme={props.colorScheme}>
       <RowLabel>
         <CheckboxContainer>
-          <HiddenCheckbox checked={checked}
-                          onChange={() => props.setChecked(props.checkedMapKey, props.checkedMapInnerKey)}/>
-          <StyledCheckbox checked={checked}
-                          colorScheme={props.colorScheme}>
+          <HiddenCheckbox
+            checked={checked}
+            onChange={() => props.setChecked(props.checkedMapKey, props.checkedMapInnerKey)}
+          />
+          <StyledCheckbox checked={checked} colorScheme={props.colorScheme}>
             <Icon viewBox="0 0 24 24">
-              <polyline points="20 6 9 17 4 12"/>
+              <polyline points="20 6 9 17 4 12" />
             </Icon>
           </StyledCheckbox>
         </CheckboxContainer>

@@ -11,7 +11,7 @@ type StylingProps = {
 };
 
 const FilterRoot = styled.div`
-  background-color: ${(props: StylingProps) => (props.colorScheme.primary)};
+  background-color: ${(props: StylingProps) => props.colorScheme.primary};
 `;
 
 type FilterMenuProps = {
@@ -23,19 +23,19 @@ type FilterMenuProps = {
 };
 
 const Filter: FunctionComponent<FilterMenuProps> = (props) => {
-
   const [colorScheme, setColorScheme] = useState<ColorScheme>(fetchColorScheme(props.theme));
 
   useEffect(() => setColorScheme(fetchColorScheme(props.theme)), [props.theme]);
 
   return (
     <FilterRoot colorScheme={colorScheme}>
-      <FilterHeader filterHeader={props.filterHeader}
-                    colorScheme={colorScheme}/>
-      <FilterMenu filterDefinitions={props.filterDefinitions}
-                  filterData={props.filterData}
-                  updateData={props.updateData}
-                  colorScheme={colorScheme}/>
+      <FilterHeader filterHeader={props.filterHeader} colorScheme={colorScheme} />
+      <FilterMenu
+        filterDefinitions={props.filterDefinitions}
+        filterData={props.filterData}
+        updateData={props.updateData}
+        colorScheme={colorScheme}
+      />
     </FilterRoot>
   );
 };

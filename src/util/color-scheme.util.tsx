@@ -8,7 +8,7 @@ const colorScheme: ColorScheme[] = [
     button: '#f5f6h6',
     hover: '#555',
     primaryTextColor: '#f1f1f1',
-    secondaryTextColor: '#161632'
+    secondaryTextColor: '#161632',
   },
   {
     primary: '#D7DBDD',
@@ -17,8 +17,8 @@ const colorScheme: ColorScheme[] = [
     button: '#BDC3C7',
     hover: '#999',
     primaryTextColor: '#2E4053',
-    secondaryTextColor: '#273746'
-  }
+    secondaryTextColor: '#273746',
+  },
 ];
 
 const fetchColorScheme = (scheme: Theme) => {

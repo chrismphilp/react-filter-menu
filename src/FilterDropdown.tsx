@@ -24,11 +24,11 @@ const DropdownButton = styled.button`
   text-align: left;
   outline: none;
   font-size: 15px;
-  
+
   &:hover {
     background-color: ${(props: StyledProps) => props.colorScheme.hover};
   }
-  
+
   &:after {
     content: '\\002B';
     color: ${(props: StyledProps) => props.colorScheme.primaryTextColor};
@@ -42,7 +42,7 @@ const DropdownContent = styled.div`
   padding: 0 18px;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  max-height: ${(props: StyledProps) => (props.open ? `${props.rowCount * 65}px` : 0)};  
+  max-height: ${(props: StyledProps) => (props.open ? `${props.rowCount * 65}px` : 0)};
   background-color: ${(props: StyledProps) => props.colorScheme.secondary};
 `;
 
@@ -56,10 +56,9 @@ type FilterDropdownProps = {
 };
 
 const FilterDropdown: FunctionComponent<FilterDropdownProps> = (props) => {
-
   const [open, setOpen] = useState<boolean>(false);
 
-  if (isEmptyObject(props.filterValues)) return <div/>;
+  if (isEmptyObject(props.filterValues)) return <div />;
 
   const setDropdown = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
@@ -67,27 +66,22 @@ const FilterDropdown: FunctionComponent<FilterDropdownProps> = (props) => {
   };
 
   return (
-    <RootContainer open={open}
-                   rowCount={0}
-                   colorScheme={props.colorScheme}>
-      <DropdownButton onClick={setDropdown}
-                      open={open}
-                      rowCount={0}
-                      colorScheme={props.colorScheme}>
+    <RootContainer open={open} rowCount={0} colorScheme={props.colorScheme}>
+      <DropdownButton onClick={setDropdown} open={open} rowCount={0} colorScheme={props.colorScheme}>
         {props.displayName}
       </DropdownButton>
-      <DropdownContent open={open}
-                       rowCount={props.filterValues.length}
-                       colorScheme={props.colorScheme}>
-        {props.filterValues.map((val, index: number) =>
-          <FilterRow key={index}
-                     setChecked={props.setChecked}
-                     checkedMapKey={props.mapKey}
-                     checkedMapInnerKey={index}
-                     checked={props.checkedMap.get(index)!}
-                     displayName={val}
-                     colorScheme={props.colorScheme}/>
-        )}
+      <DropdownContent open={open} rowCount={props.filterValues.length} colorScheme={props.colorScheme}>
+        {props.filterValues.map((val, index: number) => (
+          <FilterRow
+            key={index}
+            setChecked={props.setChecked}
+            checkedMapKey={props.mapKey}
+            checkedMapInnerKey={index}
+            checked={props.checkedMap.get(index)!}
+            displayName={val}
+            colorScheme={props.colorScheme}
+          />
+        ))}
       </DropdownContent>
     </RootContainer>
   );

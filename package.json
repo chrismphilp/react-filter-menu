@@ -1,5 +1,5 @@
 {
-  "name": "filter-menu",
+  "name": "react-filter-menu",
   "version": "0.1.0",
   "description": "A filter component for JSON data, utilising React and styled-components",
   "homepage": "https://github.com/chrismphilp/filter-menu",
@@ -17,24 +17,34 @@
     "component",
     "filter"
   ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": ["lib/**/*"],
   "license": "MIT",
   "dependencies": {
     "@types/jest": "24.0.18",
     "@types/node": "12.7.8",
     "@types/react": "16.9.4",
     "@types/react-dom": "16.9.1",
-    "@types/styled-components": "^4.1.19",
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1",
-    "react-scripts": "3.1.2",
-    "styled-components": "^4.4.0",
+    "@types/styled-components": "^4.4.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1",
+    "styled-components": "^4.4.1",
     "typescript": "3.6.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-typescript": "tsc",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,5 +61,10 @@
       "last 1 safari version"
     ]
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "prettier": "^2.0.5",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0"
+  }
 }

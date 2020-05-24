@@ -1,15 +1,22 @@
 import { IFilterDefinition } from '../model/FilterDefinitions.model';
 
-const getPresentableData = (filterDefinitions: IFilterDefinition[], filterData: any[],
-                            checkedValuesMap: Map<number, Map<number, boolean>>,
-                            filterValuesMap: Map<number, any[]>): any[] => {
+const getPresentableData = (
+  filterDefinitions: IFilterDefinition[],
+  filterData: any[],
+  checkedValuesMap: Map<number, Map<number, boolean>>,
+  filterValuesMap: Map<number, any[]>,
+): any[] => {
   const includeMap: Map<number, boolean> = calculateFilterValues(
-    filterDefinitions, filterData, checkedValuesMap, filterValuesMap);
+    filterDefinitions,
+    filterData,
+    checkedValuesMap,
+    filterValuesMap,
+  );
 
   if (includeMap.size === 0) {
     return filterData;
   } else {
-    let data: any[] = [];
+    const data: any[] = [];
     for (let i = 0; i < includeMap.size; i++) {
       if (includeMap.get(i)) data.push(filterData[i]);
     }
@@ -17,11 +24,13 @@ const getPresentableData = (filterDefinitions: IFilterDefinition[], filterData: 
   }
 };
 
-const calculateFilterValues = (filterDefinitions: IFilterDefinition[], filterData: any[],
-                               checkedValuesMap: Map<number, Map<number, boolean>>,
-                               filterValuesMap: Map<number, any[]>): Map<number, boolean> => {
-
-  let includeMap: Map<number, boolean> = new Map<number, boolean>();
+const calculateFilterValues = (
+  filterDefinitions: IFilterDefinition[],
+  filterData: any[],
+  checkedValuesMap: Map<number, Map<number, boolean>>,
+  filterValuesMap: Map<number, any[]>,
+): Map<number, boolean> => {
+  const includeMap: Map<number, boolean> = new Map<number, boolean>();
   const indexesToInclude: number[] = getMapKeysToInclude(checkedValuesMap);
 
   for (let i = 0; i < indexesToInclude.length; i++) {
@@ -33,9 +42,7 @@ const calculateFilterValues = (filterDefinitions: IFilterDefinition[], filterDat
     for (let j = 0; j < filterData.length; j++) {
       let shouldInclude: boolean = false;
       for (let k = 0; k < filterValues.length; k++) {
-        if (relatedMap.get(k)
-          && !shouldInclude
-          && filterData[j][currentObjectKey] === filterValues[k]) {
+        if (relatedMap.get(k) && !shouldInclude && filterData[j][currentObjectKey] === filterValues[k]) {
           shouldInclude = true;
           break;
         }
@@ -48,7 +55,7 @@ const calculateFilterValues = (filterDefinitions: IFilterDefinition[], filterDat
 };
 
 const getMapKeysToInclude = (checkedValuesMap: Map<number, Map<number, boolean>>): number[] => {
-  let indexesToInclude: number[] = [];
+  const indexesToInclude: number[] = [];
 
   for (let i = 0; i < checkedValuesMap.size; i++) {
     const innerMap: Map<number, boolean> = checkedValuesMap.get(i)!;
@@ -62,7 +69,8 @@ const getMapKeysToInclude = (checkedValuesMap: Map<number, Map<number, boolean>>
   return indexesToInclude;
 };
 
-const resetCheckedValuesMap = (checkedValuesMap: Map<number, Map<number, boolean>>
+const resetCheckedValuesMap = (
+  checkedValuesMap: Map<number, Map<number, boolean>>,
 ): Map<number, Map<number, boolean>> => {
   for (let i = 0; i < checkedValuesMap.size; i++) {
     for (let j = 0; j < checkedValuesMap.get(i)!.size; j++) {
@@ -72,8 +80,4 @@ const resetCheckedValuesMap = (checkedValuesMap: Map<number, Map<number, boolean
   return checkedValuesMap;
 };
 
-export {
-  getPresentableData,
-  calculateFilterValues,
-  resetCheckedValuesMap
-};
+export { getPresentableData, calculateFilterValues, resetCheckedValuesMap };

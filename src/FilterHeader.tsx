@@ -8,12 +8,12 @@ type FilterStylingProps = {
 
 const FilterHeaderRoot = styled.div`
   width: 100%;
-  minHeight: 15px;
-  background-color: ${(props: FilterStylingProps) => (props.colorScheme.primary)};
+  minheight: 15px;
+  background-color: ${(props: FilterStylingProps) => props.colorScheme.primary};
 `;
 
 const FilterHeaderText = styled.h2`
-  color: ${(props: FilterStylingProps) => (props.colorScheme.secondaryTextColor)};
+  color: ${(props: FilterStylingProps) => props.colorScheme.secondaryTextColor};
   padding-top: 15px;
   padding-left: 15px;
 `;
@@ -27,9 +27,9 @@ const FilterHeader: FunctionComponent<FilterHeaderProps> = (props) => {
   return (
     <FilterHeaderRoot colorScheme={props.colorScheme}>
       <FilterHeaderText colorScheme={props.colorScheme}>{props.filterHeader}</FilterHeaderText>
-      <hr/>
+      <hr />
     </FilterHeaderRoot>
-  )
+  );
 };
 
 export default FilterHeader;

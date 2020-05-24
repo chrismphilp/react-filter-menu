@@ -1,5 +1,5 @@
-import React from 'react';
-import { calculateFilterValues, getPresentableData, resetCheckedValuesMap } from '../../util/process-value.util';
+import * as React from 'react';
+import { calculateFilterValues, getPresentableData, resetCheckedValuesMap } from '../../src/util/process-value.util';
 import filterDefinitionMock from '../mocks/filter-definition.mock';
 import filterDataMock from '../mocks/filter-data.mock';
 import filterValuesMapMock from '../mocks/filter-values-map.mock';

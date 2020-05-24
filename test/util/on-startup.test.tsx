@@ -1,5 +1,5 @@
-import React from 'react';
-import { processFilterMap } from '../../util/on-startup.util';
+import * as React from 'react';
+import { processFilterMap } from '../../src/util/on-startup.util';
 import filterDefinitionMock from '../mocks/filter-definition.mock';
 import filterDataMock from '../mocks/filter-data.mock';
 

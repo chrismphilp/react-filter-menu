@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Filter from '../Filter';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import Filter from '../src/Filter';
 
 test('renders without crashing', () => {
   const div = document.createElement('div');
