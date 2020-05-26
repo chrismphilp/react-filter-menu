@@ -8,4 +8,4 @@ export interface ColorScheme {
   secondaryTextColor: string;
 }
 
-export type Theme = 'dark' | 'light';
+export type Theme = 'dark' | 'light' | undefined;

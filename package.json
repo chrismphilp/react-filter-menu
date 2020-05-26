@@ -1,6 +1,6 @@
 {
   "name": "react-filter-menu",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "description": "A filter component for JSON data, utilising React and styled-components",
   "homepage": "https://github.com/chrismphilp/filter-menu",
   "readmeFilename": "README.md",
