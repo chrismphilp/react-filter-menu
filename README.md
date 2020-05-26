@@ -1,44 +1,107 @@
-This project was bootstrapped with [Create React Filter](https://github.com/facebook/create-react-app).
+# react-filter-menu
 
-## Available Scripts
+The aim of this project is to create a simple filtration system for data,
+providing both a versatile UI design aesthetic and efficient processing 
+of data.
 
-In the project directory, you can run:
+## Installation
 
-### `npm start`
+```sh
+$ npm i -g npm
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+// with npm
+$ npm i react-filter-menu
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+// with yarn
+$ yarn add react-filter-menu
 
-### `npm test`
+Note: add --save if you are using npm < 5.0.0
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+Here is a quick example to get you started, **it's all you need**:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Filter, IFilterDefinition} from 'react-filter-menu';
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+const filterDefinitions: IFilterDefinition[] = [
+  {
+    displayName: 'Name',
+    objectKey: 'name'
+  }
+];
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+const filterData = [
+  {	 
+    age: 14,	  
+    name: 'Paul Phelps',	  
+    alive: true	
+  },	 
+  {	 
+    age: 25,	
+    name: 'Chris Philp',
+    alive: true	
+  },
+];
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+const App = () => {
+  return (
+    <Filter filterHeader={'Filter'}
+            updateData={(data) => console.log('New filtered data:', data)}
+            filterDefinitions={filterDefinitions}
+            filterData={filterData}
+            theme={'light'}/>
+  );
+}
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ReactDOM.render(<App/>, document.querySelector('#app'));
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Further Documentation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### ```<Filter/> ```
 
-## Learn More
+1) ```filterHeader``` 
+    1) Input: (<b>string</b>): Text to be displayed at the header of the Filter menu.
+2) ```updateData```
+    1) Input: ((data: <b>T</b>) => void): Function that takes data and does
+    something with it, but returns nothing.
+    1) Output: (<b>T</b>): Data of type T, filtered on the criteria specified by
+    the user.
+3) ```filterDefinitions```
+    1) Input: (<b>IFilterDefinition</b>[]): An array of filter definitions which can be
+    used to define which filter options will be displayed.
+4) ```filterData```
+    1) Input: (<b>any</b>): Any data can be inputted here, as long as it 
+    contains the required fields from the filterDefinitions data.
+5) ```theme```
+    1) Input: ('light' | 'dark'): Defaults to the light theme.     
 
-You can learn more in the [Create React Filter documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### ```<IFilterDefinition/>```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1) ```displayName``` 
+    1) Input: (<b>string</b>): Text to be displayed on the expandable filter-menu row.
+2) ```objectKey```
+    1) Input: ((data: <b>T</b>) => void): The key used to access the required data from 
+    the collection.
+3) ```checkedByDefault```
+    1) Input: (<b>boolean</b> - *optional*): True if you want the option to be selected
+    by default. Defaults to *false*.
+4) ```checkboxIcon```
+    1) Input: (<b>ReactElement<IFilterIcon></b> | <b>null</b> - *optional*): Provide your
+    own checkbox icon if required. Uses the standard, onClick behaviour.
+5) ```filterValues```
+    1) Input: (<b>any</b>[] - *optional*): Specify the filter values to be used, if you
+    do not want all options to be available.  
+## Examples
+
+Are you looking for an example project to get started?
+[Take a look here](https://github.com/chrismphilp/blog).
+
+## License
+
+This project is licensed under the terms of the[MIT license](/LICENSE).

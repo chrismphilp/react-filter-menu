@@ -19,7 +19,7 @@ type FilterMenuProps = {
   filterDefinitions: IFilterDefinition[];
   filterData: any[];
   filterHeader: string;
-  theme: Theme;
+  theme?: Theme;
 };
 
 const Filter: FunctionComponent<FilterMenuProps> = (props) => {
