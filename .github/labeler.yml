@@ -2,15 +2,14 @@
 repo:
   - ./*
 
-# Add '@domain/core' label to any change within the 'core' package
-@core:
+# Add 'core' label to any change within the 'core' package
+core:
   - src/*
-  - package/core/**/*
 
-# Add '@workflow' label to any change within the 'workflow' package
-@workflow:
+# Add 'workflow' label to any change within the 'workflow' package
+workflow:
   - workflow/*
 
-# Add '@test' label to any change to *.spec.js files within the source dir
-@test:
+# Add 'test' label to any change to *.spec.js files within the source dir
+test:
   - test/*
