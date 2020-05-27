@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: chrismphilp/react-filter-menu@master
+    - uses: chrismphilp/labeler@master
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
