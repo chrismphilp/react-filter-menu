@@ -68,8 +68,8 @@ ReactDOM.render(<App/>, document.querySelector('#app'));
 1) ```filterHeader``` 
     1) Input: (<b>string</b>): Text to be displayed at the header of the Filter menu.
 2) ```updateData```
-    1) Input: ((data: <b>T</b>) => void): Function that takes data and does
-    something with it, but returns nothing.
+    1) Input: ((data: <b>T</b>) => void): Function that takes data as an input parameter 
+    and does something with it, but returns nothing.
     1) Output: (<b>T</b>): Data of type T, filtered on the criteria specified by
     the user.
 3) ```filterDefinitions```
@@ -86,7 +86,7 @@ ReactDOM.render(<App/>, document.querySelector('#app'));
 1) ```displayName``` 
     1) Input: (<b>string</b>): Text to be displayed on the expandable filter-menu row.
 2) ```objectKey```
-    1) Input: ((data: <b>T</b>) => void): The key used to access the required data from 
+    1) Input: (<b>string</b>): The key used to access the required data from 
     the collection.
 3) ```checkedByDefault```
     1) Input: (<b>boolean</b> - *optional*): True if you want the option to be selected
