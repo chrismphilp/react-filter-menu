@@ -13,11 +13,3 @@ workflow:
 # Add 'test' label to any change to *.spec.js files within the source dir
 test:
   - test/*
-
-S:
-  size-below: 10
-M:
-  size-above: 9
-  size-below: 100
-L:
-  size-above: 100
