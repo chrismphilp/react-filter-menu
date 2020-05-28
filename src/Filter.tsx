@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { IFilterDefinition } from './model/FilterDefinitions.model';
 import { ColorScheme, Theme } from './model/ColorScheme.model';
-import FilterHeader from './FilterHeader';
 import FilterMenu from './FilterMenu';
 import fetchColorScheme from './util/color-scheme.util';
 import styled from 'styled-components';
@@ -16,9 +15,9 @@ const FilterRoot = styled.div`
 
 type FilterMenuProps = {
   updateData: (data: any[]) => void;
-  filterDefinitions: IFilterDefinition[];
+  filterDefinitions: IFilterDefinition<any>[];
   filterData: any[];
-  filterHeader: string;
+  itemsPerRow?: number;
   theme?: Theme;
 };
 
@@ -26,7 +25,7 @@ const Filter: FunctionComponent<FilterMenuProps> = ({
   updateData,
   filterDefinitions,
   filterData,
-  filterHeader,
+  itemsPerRow = 3,
   theme,
 }) => {
   const [colorScheme, setColorScheme] = useState<ColorScheme>(fetchColorScheme(theme));
@@ -35,11 +34,11 @@ const Filter: FunctionComponent<FilterMenuProps> = ({
 
   return (
     <FilterRoot colorScheme={colorScheme}>
-      <FilterHeader filterHeader={filterHeader} colorScheme={colorScheme} />
       <FilterMenu
+        updateData={updateData}
         filterDefinitions={filterDefinitions}
         filterData={filterData}
-        updateData={updateData}
+        itemsPerRow={itemsPerRow}
         colorScheme={colorScheme}
       />
     </FilterRoot>

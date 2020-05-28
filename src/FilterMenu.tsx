@@ -6,6 +6,7 @@ import { getPresentableData, resetCheckedValuesMap } from './util/process-value.
 import { ColorScheme } from './model/ColorScheme.model';
 import styled from 'styled-components';
 import device from './device-sizes';
+import { splitArrayIntoGroups } from './util/data.util';
 
 type StyledProps = {
   colorScheme: ColorScheme;
@@ -24,19 +25,26 @@ const FilterButton = styled.button`
 `;
 
 const ButtonContainer = styled.div`
+  @media ${device.tablet} {
+    display: flex;
+    padding-top: 5px;
+  }
   @media ${device.laptop} {
     display: flex;
+    padding-top: 5px;
   }
   background-color: ${(props: StyledProps) => props.colorScheme.secondary};
-  padding: 10px;
 `;
 
 const FilterButtonContainer = styled.div`
   @media ${device.mobile} {
     width: 100%;
-    padding-top: 5px;
+    padding: 0 5px 5px 5px;
   }
-
+  @media ${device.tablet} {
+    flex: 1;
+    padding: 0 5px 5px 5px;
+  }
   @media ${device.laptop} {
     flex: 1;
     padding-top: 0;
@@ -46,23 +54,41 @@ const FilterButtonContainer = styled.div`
 
 type FilterMenuProps = {
   updateData: (data: any[]) => void;
-  filterDefinitions: IFilterDefinition[];
+  filterDefinitions: IFilterDefinition<any>[];
   filterData: any[];
+  itemsPerRow: number;
   colorScheme: ColorScheme;
 };
 
-const FilterMenu: FunctionComponent<FilterMenuProps> = ({ updateData, filterDefinitions, filterData, colorScheme }) => {
+const FilterMenu: FunctionComponent<FilterMenuProps> = ({
+  updateData,
+  filterDefinitions,
+  filterData,
+  itemsPerRow,
+  colorScheme,
+}) => {
+  const splitFilterDefinitions: IFilterDefinition<any>[][] = splitArrayIntoGroups(filterDefinitions, itemsPerRow);
   const [loading, setLoading] = useState<boolean>(false);
   const [checkedValuesMap, setCheckedValuesMap] = useState<Map<number, Map<number, boolean>>>(
     new Map<number, Map<number, boolean>>(),
   );
   const [filterValuesMap, setFilterValuesMap] = useState<Map<number, any[]>>(new Map<number, any[]>());
+  const [selectedRowMap, setSelectedRowMap] = useState<Map<number, boolean>>(new Map<number, boolean>());
 
   useEffect(() => {
     const [fMap, cMap] = processFilterMap(filterDefinitions, filterData);
     setCheckedValuesMap(cMap);
     setFilterValuesMap(fMap);
   }, [filterDefinitions, filterData]);
+
+  const isRowSelected = (index: number): boolean => (selectedRowMap.has(index) ? selectedRowMap.get(index)! : false);
+
+  const setRowSelected = (index: number, open: boolean): void => {
+    const currMap: Map<number, boolean> = selectedRowMap;
+    currMap.set(index, !open);
+    setSelectedRowMap(currMap);
+    setLoading(!loading);
+  };
 
   const handleFilterRowClick = (checkedKey: number, checkedInnerKey: number) => {
     const mapCopy: Map<number, Map<number, boolean>> = checkedValuesMap;
@@ -71,11 +97,11 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = ({ updateData, filterDefi
     currentMap.set(checkedInnerKey, !previousState);
     mapCopy.set(checkedKey, currentMap);
     setCheckedValuesMap(mapCopy);
+    updateCurrentValues();
     setLoading(!loading);
   };
 
-  const updateCurrentValues = (event: any): void => {
-    event.preventDefault();
+  const updateCurrentValues = (): void => {
     const startTime = performance.now();
     updateData(getPresentableData(filterDefinitions, filterData, checkedValuesMap, filterValuesMap));
     console.error(`Total time: ${performance.now() - startTime}`);
@@ -84,37 +110,50 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = ({ updateData, filterDefi
   const resetCheckedValues = (event: any): void => {
     event.preventDefault();
     setCheckedValuesMap(resetCheckedValuesMap(checkedValuesMap));
+    updateCurrentValues();
     setLoading(!loading);
   };
 
   return (
-    <div>
-      {filterDefinitions.map((definition: IFilterDefinition, index: number) => (
-        <div key={index}>
-          {loading}
-          <FilterDropdown
-            mapKey={index}
-            setChecked={handleFilterRowClick}
-            displayName={definition.displayName}
-            filterValues={filterValuesMap.get(index)!}
-            checkedMap={checkedValuesMap.get(index)!}
-            colorScheme={colorScheme}
-          />
-        </div>
-      ))}
+    <>
+      {splitFilterDefinitions.map((definitionArray: IFilterDefinition<any>[], rowIndex: number) => {
+        const open = isRowSelected(rowIndex);
+
+        return (
+          <ButtonContainer colorScheme={colorScheme}>
+            {definitionArray.map((individualDefinition: IFilterDefinition<any>, index: number) => {
+              // Previous index of the filter definition before array splitting
+              const previousIndex: number = rowIndex * splitFilterDefinitions[0].length + index;
+
+              return (
+                <FilterButtonContainer key={index}>
+                  {loading}
+                  <FilterDropdown
+                    setRowSelected={setRowSelected}
+                    setChecked={handleFilterRowClick}
+                    mapKey={previousIndex}
+                    displayName={individualDefinition.displayName}
+                    filterValues={filterValuesMap.get(previousIndex)!}
+                    checkedMap={checkedValuesMap.get(previousIndex)!}
+                    open={open}
+                    rowIndex={rowIndex}
+                    colorScheme={colorScheme}
+                  />
+                </FilterButtonContainer>
+              );
+            })}
+          </ButtonContainer>
+        );
+      })}
+
       <ButtonContainer colorScheme={colorScheme}>
         <FilterButtonContainer>
           <FilterButton onClick={resetCheckedValues} type="button" colorScheme={colorScheme}>
             Reset Selections
           </FilterButton>
         </FilterButtonContainer>
-        <FilterButtonContainer>
-          <FilterButton onClick={updateCurrentValues} type="button" colorScheme={colorScheme}>
-            Apply Filter
-          </FilterButton>
-        </FilterButtonContainer>
       </ButtonContainer>
-    </div>
+    </>
   );
 };
 

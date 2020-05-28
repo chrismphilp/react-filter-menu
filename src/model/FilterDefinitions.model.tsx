@@ -1,11 +1,12 @@
 import { ReactElement } from 'react';
 
-export type IFilterDefinition = {
+export type IFilterDefinition<T> = {
   displayName: string;
   objectKey: string;
   checkedByDefault?: boolean;
   checkboxIcon?: ReactElement<IFilterIcon> | null;
-  filterValues?: any[];
+  filterValues?: T[];
+  type: string | number | Date;
 };
 
 export type IFilterIcon = {

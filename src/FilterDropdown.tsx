@@ -47,38 +47,37 @@ const DropdownContent = styled.div`
 `;
 
 type FilterDropdownProps = {
+  setRowSelected: (index: number, open: boolean) => void;
   setChecked: (k1: number, k2: number) => void;
   mapKey: number;
   displayName: string;
   filterValues: any[];
   checkedMap: Map<number, boolean>;
+  open: boolean;
+  rowIndex: number;
   colorScheme: ColorScheme;
 };
 
 const FilterDropdown: FunctionComponent<FilterDropdownProps> = ({
+  setRowSelected,
   setChecked,
   mapKey,
   displayName,
   filterValues,
   checkedMap,
+  open,
+  rowIndex,
   colorScheme,
 }) => {
-  const [open, setOpen] = useState<boolean>(false);
-
   if (isEmptyObject(filterValues)) return <div />;
-
-  const setDropdown = (event: any): void => {
-    event.preventDefault();
-    setOpen(!open);
-  };
 
   return (
     <RootContainer open={open} rowCount={0} colorScheme={colorScheme}>
-      <DropdownButton onClick={setDropdown} open={open} rowCount={0} colorScheme={colorScheme}>
+      <DropdownButton onClick={() => setRowSelected(rowIndex, open)} open={open} rowCount={0} colorScheme={colorScheme}>
         {displayName}
       </DropdownButton>
       <DropdownContent open={open} rowCount={filterValues.length} colorScheme={colorScheme}>
-        {filterValues.map((val, index: number) => (
+        {filterValues.map((val: string, index: number) => (
           <FilterRow
             key={index}
             setChecked={setChecked}

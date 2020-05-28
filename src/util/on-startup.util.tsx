@@ -1,7 +1,7 @@
 import { IFilterDefinition } from '..';
 
 const processFilterMap = (
-  filterDefinitions: IFilterDefinition[],
+  filterDefinitions: IFilterDefinition<any>[],
   filterData: any[],
 ): [Map<number, any[]>, Map<number, Map<number, boolean>>] => {
   const filterValues: Map<number, any[]> = new Map<number, any[]>();

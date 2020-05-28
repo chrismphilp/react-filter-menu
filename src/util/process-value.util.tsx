@@ -1,7 +1,7 @@
 import { IFilterDefinition } from '..';
 
 const getPresentableData = (
-  filterDefinitions: IFilterDefinition[],
+  filterDefinitions: IFilterDefinition<any>[],
   filterData: any[],
   checkedValuesMap: Map<number, Map<number, boolean>>,
   filterValuesMap: Map<number, any[]>,
@@ -25,7 +25,7 @@ const getPresentableData = (
 };
 
 const calculateFilterValues = (
-  filterDefinitions: IFilterDefinition[],
+  filterDefinitions: IFilterDefinition<any>[],
   filterData: any[],
   checkedValuesMap: Map<number, Map<number, boolean>>,
   filterValuesMap: Map<number, any[]>,
