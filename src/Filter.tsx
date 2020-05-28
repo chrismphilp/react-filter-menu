@@ -22,18 +22,24 @@ type FilterMenuProps = {
   theme?: Theme;
 };
 
-const Filter: FunctionComponent<FilterMenuProps> = (props) => {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(fetchColorScheme(props.theme));
+const Filter: FunctionComponent<FilterMenuProps> = ({
+  updateData,
+  filterDefinitions,
+  filterData,
+  filterHeader,
+  theme,
+}) => {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>(fetchColorScheme(theme));
 
-  useEffect(() => setColorScheme(fetchColorScheme(props.theme)), [props.theme]);
+  useEffect(() => setColorScheme(fetchColorScheme(theme)), [theme]);
 
   return (
     <FilterRoot colorScheme={colorScheme}>
-      <FilterHeader filterHeader={props.filterHeader} colorScheme={colorScheme} />
+      <FilterHeader filterHeader={filterHeader} colorScheme={colorScheme} />
       <FilterMenu
-        filterDefinitions={props.filterDefinitions}
-        filterData={props.filterData}
-        updateData={props.updateData}
+        filterDefinitions={filterDefinitions}
+        filterData={filterData}
+        updateData={updateData}
         colorScheme={colorScheme}
       />
     </FilterRoot>

@@ -1,4 +1,4 @@
-import { IFilterDefinition } from '../model/FilterDefinitions.model';
+import { IFilterDefinition } from '..';
 
 const processFilterMap = (
   filterDefinitions: IFilterDefinition[],

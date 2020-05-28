@@ -6,9 +6,9 @@ export type IFilterDefinition = {
   checkedByDefault?: boolean;
   checkboxIcon?: ReactElement<IFilterIcon> | null;
   filterValues?: any[];
-}
+};
 
 export type IFilterIcon = {
   checked: boolean;
   disabled: boolean;
-}
+};
