@@ -1,3 +1,12 @@
+[![Version](https://img.shields.io/npm/v/react-filter-menu.svg?colorB=green)](https://www.npmjs.com/package/react-filter-menu)
+[![Size](https://img.shields.io/bundlephobia/min/react-filter-menu)](https://www.npmjs.com/package/react-filter-menu)
+[![Build](https://img.shields.io/github/workflow/status/chrismphilp/react-filter-menu/Node%20CI)](https://github.com/chrismphilp/react-filter-menu/actions)
+[![TopLanguage](https://img.shields.io/github/languages/top/chrismphilp/react-filter-menu)](https://github.com/chrismphilp/react-filter-menu)
+[![Downloads](https://img.shields.io/npm/dw/react-filter-menu)](https://www.npmjs.com/package/react-filter-menu)
+[![Issues](https://img.shields.io/github/issues/chrismphilp/react-filter-menu)](https://github.com/chrismphilp/react-filter-menu/issues)
+[![LastCommit](https://img.shields.io/github/last-commit/chrismphilp/react-filter-menu)](https://github.com/chrismphilp/react-filter-menu)
+![License](https://img.shields.io/github/license/chrismphilp/react-filter-menu)
+
 # react-filter-menu
 
 The aim of this project is to create a simple filtration system for data,

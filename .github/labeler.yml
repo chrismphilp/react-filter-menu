@@ -5,6 +5,7 @@ repo:
 # Add 'core' label to any change within the 'core' package
 core:
   - src/*
+  - src/**/*
 
 # Add 'workflow' label to any change within the 'workflow' package
 workflow:
@@ -14,3 +15,4 @@ workflow:
 # Add 'test' label to any change to *.spec.js files within the source dir
 test:
   - test/*
+  - test/**/*
