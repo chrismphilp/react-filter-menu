@@ -51,7 +51,7 @@ type FilterMenuProps = {
   colorScheme: ColorScheme;
 };
 
-const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
+const FilterMenu: FunctionComponent<FilterMenuProps> = ({ updateData, filterDefinitions, filterData, colorScheme }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [checkedValuesMap, setCheckedValuesMap] = useState<Map<number, Map<number, boolean>>>(
     new Map<number, Map<number, boolean>>(),
@@ -59,10 +59,10 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
   const [filterValuesMap, setFilterValuesMap] = useState<Map<number, any[]>>(new Map<number, any[]>());
 
   useEffect(() => {
-    const [fMap, cMap] = processFilterMap(props.filterDefinitions, props.filterData);
+    const [fMap, cMap] = processFilterMap(filterDefinitions, filterData);
     setCheckedValuesMap(cMap);
     setFilterValuesMap(fMap);
-  }, [props.filterDefinitions, props.filterData]);
+  }, [filterDefinitions, filterData]);
 
   const handleFilterRowClick = (checkedKey: number, checkedInnerKey: number) => {
     const mapCopy: Map<number, Map<number, boolean>> = checkedValuesMap;
@@ -74,14 +74,14 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
     setLoading(!loading);
   };
 
-  const updateCurrentValues = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const updateCurrentValues = (event: any): void => {
     event.preventDefault();
     const startTime = performance.now();
-    props.updateData(getPresentableData(props.filterDefinitions, props.filterData, checkedValuesMap, filterValuesMap));
+    updateData(getPresentableData(filterDefinitions, filterData, checkedValuesMap, filterValuesMap));
     console.error(`Total time: ${performance.now() - startTime}`);
   };
 
-  const resetCheckedValues = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const resetCheckedValues = (event: any): void => {
     event.preventDefault();
     setCheckedValuesMap(resetCheckedValuesMap(checkedValuesMap));
     setLoading(!loading);
@@ -89,7 +89,7 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
 
   return (
     <div>
-      {props.filterDefinitions.map((definition: IFilterDefinition, index: number) => (
+      {filterDefinitions.map((definition: IFilterDefinition, index: number) => (
         <div key={index}>
           {loading}
           <FilterDropdown
@@ -98,18 +98,18 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = (props) => {
             displayName={definition.displayName}
             filterValues={filterValuesMap.get(index)!}
             checkedMap={checkedValuesMap.get(index)!}
-            colorScheme={props.colorScheme}
+            colorScheme={colorScheme}
           />
         </div>
       ))}
-      <ButtonContainer colorScheme={props.colorScheme}>
+      <ButtonContainer colorScheme={colorScheme}>
         <FilterButtonContainer>
-          <FilterButton onClick={resetCheckedValues} type="button" colorScheme={props.colorScheme}>
+          <FilterButton onClick={resetCheckedValues} type="button" colorScheme={colorScheme}>
             Reset Selections
           </FilterButton>
         </FilterButtonContainer>
         <FilterButtonContainer>
-          <FilterButton onClick={updateCurrentValues} type="button" colorScheme={props.colorScheme}>
+          <FilterButton onClick={updateCurrentValues} type="button" colorScheme={colorScheme}>
             Apply Filter
           </FilterButton>
         </FilterButtonContainer>

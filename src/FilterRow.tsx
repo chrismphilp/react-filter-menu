@@ -73,24 +73,28 @@ type FilterRowProps = {
   colorScheme: ColorScheme;
 };
 
-const FilterRow: FunctionComponent<FilterRowProps> = (props) => {
-  const checked = props.checked !== undefined ? props.checked : false;
+const FilterRow: FunctionComponent<FilterRowProps> = ({
+  setChecked,
+  checked,
+  checkedMapKey,
+  checkedMapInnerKey,
+  displayName,
+  colorScheme,
+}) => {
+  const isChecked = checked !== undefined ? checked : false;
 
   return (
-    <RootContainer colorScheme={props.colorScheme}>
+    <RootContainer colorScheme={colorScheme}>
       <RowLabel>
         <CheckboxContainer>
-          <HiddenCheckbox
-            checked={checked}
-            onChange={() => props.setChecked(props.checkedMapKey, props.checkedMapInnerKey)}
-          />
-          <StyledCheckbox checked={checked} colorScheme={props.colorScheme}>
+          <HiddenCheckbox checked={isChecked} onChange={() => setChecked(checkedMapKey, checkedMapInnerKey)} />
+          <StyledCheckbox checked={isChecked} colorScheme={colorScheme}>
             <Icon viewBox="0 0 24 24">
               <polyline points="20 6 9 17 4 12" />
             </Icon>
           </StyledCheckbox>
         </CheckboxContainer>
-        <CheckboxText>{props.displayName.toString()}</CheckboxText>
+        <CheckboxText>{displayName.toString()}</CheckboxText>
       </RowLabel>
     </RootContainer>
   );

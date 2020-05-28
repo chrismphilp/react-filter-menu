@@ -23,10 +23,10 @@ type FilterHeaderProps = {
   colorScheme: ColorScheme;
 };
 
-const FilterHeader: FunctionComponent<FilterHeaderProps> = (props) => {
+const FilterHeader: FunctionComponent<FilterHeaderProps> = ({ filterHeader, colorScheme }) => {
   return (
-    <FilterHeaderRoot colorScheme={props.colorScheme}>
-      <FilterHeaderText colorScheme={props.colorScheme}>{props.filterHeader}</FilterHeaderText>
+    <FilterHeaderRoot colorScheme={colorScheme}>
+      <FilterHeaderText colorScheme={colorScheme}>{filterHeader}</FilterHeaderText>
       <hr />
     </FilterHeaderRoot>
   );
