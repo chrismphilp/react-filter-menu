@@ -1,13 +1,15 @@
 import { IFilterDefinition } from '../../src/model/FilterDefinitions.model';
 
-const filterDefinitionMock: IFilterDefinition[] = [
+const filterDefinitionMock: IFilterDefinition<any>[] = [
   {
     displayName: 'Name',
-    objectKey: 'name'
+    objectKey: 'name',
+    type: 'string'
   },
   {
     displayName: 'Age',
-    objectKey: 'age'
+    objectKey: 'age',
+    type: 'number'
   }
 ];
 

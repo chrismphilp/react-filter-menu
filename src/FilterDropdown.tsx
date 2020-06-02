@@ -42,7 +42,7 @@ const DropdownContent = styled.div`
   padding: 0 18px;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  max-height: ${(props: StyledProps) => (props.open ? `${props.rowCount * 65}px` : 0)};
+  max-height: ${(props: StyledProps) => (props.open ? `${props.rowCount * 95}px` : 0)};
   background-color: ${(props: StyledProps) => props.colorScheme.secondary};
 `;
 

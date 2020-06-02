@@ -5,7 +5,7 @@ import { processFilterMap } from './util/on-startup.util';
 import { getPresentableData, resetCheckedValuesMap } from './util/process-value.util';
 import { ColorScheme } from './model/ColorScheme.model';
 import styled from 'styled-components';
-import device from './device-sizes';
+import device from './util/device-sizes';
 import { splitArrayIntoGroups } from './util/data.util';
 
 type StyledProps = {
@@ -18,7 +18,7 @@ const FilterButton = styled.button`
   color: ${(props: StyledProps) => props.colorScheme.secondaryTextColor};
   cursor: pointer;
   padding: 18px;
-  border: none;
+  border-color: black;
   text-align: left;
   outline: none;
   font-size: 15px;
@@ -71,6 +71,9 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [checkedValuesMap, setCheckedValuesMap] = useState<Map<number, Map<number, boolean>>>(
     new Map<number, Map<number, boolean>>(),
+  );
+  const [rangeValuesMap, setRangeValuesMap] = useState<Map<number, Map<number, (number | Date)[]>>>(
+    new Map<number, Map<number, (number | Date)[]>>(),
   );
   const [filterValuesMap, setFilterValuesMap] = useState<Map<number, any[]>>(new Map<number, any[]>());
   const [selectedRowMap, setSelectedRowMap] = useState<Map<number, boolean>>(new Map<number, boolean>());
