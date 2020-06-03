@@ -10,17 +10,16 @@ type StyledProps = {
 };
 
 const RootContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: ${(props: StyledProps) => props.colorScheme.secondary};
-  padding-top: 7.5px;
-  color: ${(props: StyledProps) => props.colorScheme.secondaryTextColor};
-`;
-
-const RowLabel = styled.label`
-  width: 100%;
-  padding-left: 10.5px;
-`;
+    width: 100%;
+    height: 100%;
+    background-color: ${(props: StyledProps) => props.colorScheme.secondary};
+    padding-top: 7.5px;
+    color: ${(props: StyledProps) => props.colorScheme.secondaryTextColor};
+  `,
+  RowLabel = styled.label`
+    width: 100%;
+    padding-left: 10.5px;
+  `;
 
 type FilterRowProps = {
   setChecked: (k1: number, k2: number) => void;
@@ -50,9 +49,8 @@ const FilterRow: FunctionComponent<FilterRowProps> = ({
         {/*                   colorScheme={colorScheme}/>*/}
 
         <FilterRangeSelectionRow
-          setRange={(e, f, g) => console.log('')}
           minValue={0}
-          maxValue={0}
+          maxValue={100}
           displayName={displayName}
           colorScheme={colorScheme}
         />

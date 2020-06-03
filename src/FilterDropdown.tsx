@@ -11,40 +11,38 @@ type StyledProps = {
 };
 
 const RootContainer = styled.div`
-  background-color: ${(props: StyledProps) => props.colorScheme.tertiary};
-`;
-
-const DropdownButton = styled.button`
-  background-color: ${(props: StyledProps) => (props.open ? props.colorScheme.hover : props.colorScheme.tertiary)};
-  color: ${(props: StyledProps) => props.colorScheme.primaryTextColor};
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-
-  &:hover {
-    background-color: ${(props: StyledProps) => props.colorScheme.hover};
-  }
-
-  &:after {
-    content: '\\002B';
+    background-color: ${(props: StyledProps) => props.colorScheme.tertiary};
+  `,
+  DropdownButton = styled.button`
+    background-color: ${(props: StyledProps) => (props.open ? props.colorScheme.hover : props.colorScheme.tertiary)};
     color: ${(props: StyledProps) => props.colorScheme.primaryTextColor};
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-  }
-`;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
 
-const DropdownContent = styled.div`
-  padding: 0 18px;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-  max-height: ${(props: StyledProps) => (props.open ? `${props.rowCount * 95}px` : 0)};
-  background-color: ${(props: StyledProps) => props.colorScheme.secondary};
-`;
+    &:hover {
+      background-color: ${(props: StyledProps) => props.colorScheme.hover};
+    }
+
+    &:after {
+      content: '\\002B';
+      color: ${(props: StyledProps) => props.colorScheme.primaryTextColor};
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+  `,
+  DropdownContent = styled.div`
+    padding: 0 18px;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    max-height: ${(props: StyledProps) => (props.open ? `${props.rowCount * 95}px` : 0)};
+    background-color: ${(props: StyledProps) => props.colorScheme.secondary};
+  `;
 
 type FilterDropdownProps = {
   setRowSelected: (index: number, open: boolean) => void;

@@ -13,44 +13,42 @@ type StyledProps = {
 };
 
 const FilterButton = styled.button`
-  width: 100%;
-  background-color: ${(props: StyledProps) => props.colorScheme.button};
-  color: ${(props: StyledProps) => props.colorScheme.secondaryTextColor};
-  cursor: pointer;
-  padding: 18px;
-  border-color: black;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-`;
-
-const ButtonContainer = styled.div`
-  @media ${device.tablet} {
-    display: flex;
-    padding-top: 5px;
-  }
-  @media ${device.laptop} {
-    display: flex;
-    padding-top: 5px;
-  }
-  background-color: ${(props: StyledProps) => props.colorScheme.secondary};
-`;
-
-const FilterButtonContainer = styled.div`
-  @media ${device.mobile} {
     width: 100%;
-    padding: 0 5px 5px 5px;
-  }
-  @media ${device.tablet} {
-    flex: 1;
-    padding: 0 5px 5px 5px;
-  }
-  @media ${device.laptop} {
-    flex: 1;
-    padding-top: 0;
-    padding-left: 5px;
-  }
-`;
+    background-color: ${(props: StyledProps) => props.colorScheme.button};
+    color: ${(props: StyledProps) => props.colorScheme.secondaryTextColor};
+    cursor: pointer;
+    padding: 18px;
+    border-color: black;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  `,
+  ButtonContainer = styled.div`
+    @media ${device.tablet} {
+      display: flex;
+      padding-top: 5px;
+    }
+    @media ${device.laptop} {
+      display: flex;
+      padding-top: 5px;
+    }
+    background-color: ${(props: StyledProps) => props.colorScheme.secondary};
+  `,
+  FilterButtonContainer = styled.div`
+    @media ${device.mobile} {
+      width: 100%;
+      padding: 0 5px 5px 5px;
+    }
+    @media ${device.tablet} {
+      flex: 1;
+      padding: 0 5px 5px 5px;
+    }
+    @media ${device.laptop} {
+      flex: 1;
+      padding-top: 0;
+      padding-left: 5px;
+    }
+  `;
 
 type FilterMenuProps = {
   updateData: (data: any[]) => void;
@@ -67,16 +65,16 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = ({
   itemsPerRow,
   colorScheme,
 }) => {
-  const splitFilterDefinitions: IFilterDefinition<any>[][] = splitArrayIntoGroups(filterDefinitions, itemsPerRow);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [checkedValuesMap, setCheckedValuesMap] = useState<Map<number, Map<number, boolean>>>(
-    new Map<number, Map<number, boolean>>(),
-  );
-  const [rangeValuesMap, setRangeValuesMap] = useState<Map<number, Map<number, (number | Date)[]>>>(
-    new Map<number, Map<number, (number | Date)[]>>(),
-  );
-  const [filterValuesMap, setFilterValuesMap] = useState<Map<number, any[]>>(new Map<number, any[]>());
-  const [selectedRowMap, setSelectedRowMap] = useState<Map<number, boolean>>(new Map<number, boolean>());
+  const splitFilterDefinitions: IFilterDefinition<any>[][] = splitArrayIntoGroups(filterDefinitions, itemsPerRow),
+    [loading, setLoading] = useState<boolean>(false),
+    [checkedValuesMap, setCheckedValuesMap] = useState<Map<number, Map<number, boolean>>>(
+      new Map<number, Map<number, boolean>>(),
+    ),
+    [rangeValuesMap, setRangeValuesMap] = useState<Map<number, Map<number, (number | Date)[]>>>(
+      new Map<number, Map<number, (number | Date)[]>>(),
+    ),
+    [filterValuesMap, setFilterValuesMap] = useState<Map<number, any[]>>(new Map<number, any[]>()),
+    [selectedRowMap, setSelectedRowMap] = useState<Map<number, boolean>>(new Map<number, boolean>());
 
   useEffect(() => {
     const [fMap, cMap] = processFilterMap(filterDefinitions, filterData);
@@ -84,38 +82,34 @@ const FilterMenu: FunctionComponent<FilterMenuProps> = ({
     setFilterValuesMap(fMap);
   }, [filterDefinitions, filterData]);
 
-  const isRowSelected = (index: number): boolean => (selectedRowMap.has(index) ? selectedRowMap.get(index)! : false);
-
-  const setRowSelected = (index: number, open: boolean): void => {
-    const currMap: Map<number, boolean> = selectedRowMap;
-    currMap.set(index, !open);
-    setSelectedRowMap(currMap);
-    setLoading(!loading);
-  };
-
-  const handleFilterRowClick = (checkedKey: number, checkedInnerKey: number) => {
-    const mapCopy: Map<number, Map<number, boolean>> = checkedValuesMap;
-    const currentMap: Map<number, boolean> = mapCopy.get(checkedKey)!;
-    const previousState: boolean = currentMap.get(checkedInnerKey)!;
-    currentMap.set(checkedInnerKey, !previousState);
-    mapCopy.set(checkedKey, currentMap);
-    setCheckedValuesMap(mapCopy);
-    updateCurrentValues();
-    setLoading(!loading);
-  };
-
-  const updateCurrentValues = (): void => {
-    const startTime = performance.now();
-    updateData(getPresentableData(filterDefinitions, filterData, checkedValuesMap, filterValuesMap));
-    console.error(`Total time: ${performance.now() - startTime}`);
-  };
-
-  const resetCheckedValues = (event: any): void => {
-    event.preventDefault();
-    setCheckedValuesMap(resetCheckedValuesMap(checkedValuesMap));
-    updateCurrentValues();
-    setLoading(!loading);
-  };
+  const isRowSelected = (index: number): boolean => (selectedRowMap.has(index) ? selectedRowMap.get(index)! : false),
+    setRowSelected = (index: number, open: boolean): void => {
+      const currMap: Map<number, boolean> = selectedRowMap;
+      currMap.set(index, !open);
+      setSelectedRowMap(currMap);
+      setLoading(!loading);
+    },
+    handleFilterRowClick = (checkedKey: number, checkedInnerKey: number) => {
+      const mapCopy: Map<number, Map<number, boolean>> = checkedValuesMap,
+        currentMap: Map<number, boolean> = mapCopy.get(checkedKey)!,
+        previousState: boolean = currentMap.get(checkedInnerKey)!;
+      currentMap.set(checkedInnerKey, !previousState);
+      mapCopy.set(checkedKey, currentMap);
+      setCheckedValuesMap(mapCopy);
+      updateCurrentValues();
+      setLoading(!loading);
+    },
+    updateCurrentValues = (): void => {
+      const startTime = performance.now();
+      updateData(getPresentableData(filterDefinitions, filterData, checkedValuesMap, filterValuesMap));
+      console.error(`Total time: ${performance.now() - startTime}`);
+    },
+    resetCheckedValues = (event: any): void => {
+      event.preventDefault();
+      setCheckedValuesMap(resetCheckedValuesMap(checkedValuesMap));
+      updateCurrentValues();
+      setLoading(!loading);
+    };
 
   return (
     <>
